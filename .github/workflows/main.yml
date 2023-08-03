@@ -1,3 +1,4 @@
+name: omericoramos.tech CI
 on:
   push:
     branches:
