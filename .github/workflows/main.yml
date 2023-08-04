@@ -3,22 +3,13 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - public/build/**
-      - vendor/**
-      - node_modules/**
-      - bootstrap/**
-      - storage/framework/**
-      - storage/log/**
-      - .git/**
-      - .env
 jobs:
   build:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 checkout do repositorio
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: 📂 fazendo o deploy churchHub
         uses: easingthemes/ssh-deploy@main
@@ -30,3 +21,4 @@ jobs:
           REMOTE_USER: ${{secrets.REMOTE_USER}}
           REMOTE_PORT: ${{secrets.REMOTE_PORT}}
           TARGET: ${{secrets.REMOTE_TARGET}}
+          EXCLUDE: "/node_modules/,/public/build/,/public/hot/,/public/storage,/storage/*.key,/vendor/,.env"
