@@ -21,4 +21,4 @@ jobs:
           REMOTE_USER: ${{secrets.REMOTE_USER}}
           REMOTE_PORT: ${{secrets.REMOTE_PORT}}
           TARGET: ${{secrets.REMOTE_TARGET}}
-          EXCLUDE: "/node_modules/,/public/build/,/public/hot/,/public/storage/,/storage/*.key,/vendor/,.env"
+          EXCLUDE: "/bootstrap/cache/,/node_modules/,/public/build/,/public/hot/,/public/storage/,/storage/,/vendor/,.env"
