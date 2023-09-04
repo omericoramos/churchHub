@@ -32,46 +32,27 @@ class MemberController extends Controller
         return $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
+    public function search(Request $request)
+    {
+        $memberList =  $this->memberAction->search($request->member);
+        return $memberList;
+    }
+    
     public function show()
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
     public function edit()
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request,)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
     public function destroy()
     {
         //

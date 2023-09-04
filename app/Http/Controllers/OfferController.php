@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Offer\OfferAction;
 use App\Actions\Offer\OfferCategoryAction;
+use App\Actions\Offer\StoreOfferAction;
+use App\Http\Requests\StoreOfferRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class OfferController extends Controller
 {
-    public function __construct(
-        protected OfferCategoryAction $offerCategoryAction = new OfferCategoryAction
-    ) {
-    }
     public function index()
     {
         //
@@ -19,21 +18,13 @@ class OfferController extends Controller
 
     public function create()
     {
-        $offerCategory = $this->offerCategoryAction->list();
-        return Inertia::render('Offer/Create', [
-            'offerCategory' => $offerCategory
-        ]);
+        return Inertia::render('Offer/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreOfferRequest $request, OfferAction $offerAction)
     {
-        //
+        $response  = $offerAction->store($request->all(), new StoreOfferAction);
+        return $response;
     }
 
     /**

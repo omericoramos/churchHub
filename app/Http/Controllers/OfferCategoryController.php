@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Offer\OfferCategoryAction;
+use App\Http\Requests\StoreCategoryOfferRequest;
 use App\Models\OfferCategory;
 use Illuminate\Http\Request;
 
 class OfferCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(OfferCategoryAction $offerCategoryAction)
     {
-        //
+        $offerCategory = $offerCategoryAction->list();
+        return $offerCategory;
     }
 
     /**
@@ -27,57 +25,27 @@ class OfferCategoryController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreCategoryOfferRequest $request, OfferCategoryAction $offerCategoryAction)
     {
-        //
+        $response = $offerCategoryAction->store($request->categoryStore);
+        return $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OfferCategory  $offerCategory
-     * @return \Illuminate\Http\Response
-     */
     public function show(OfferCategory $offerCategory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OfferCategory  $offerCategory
-     * @return \Illuminate\Http\Response
-     */
     public function edit(OfferCategory $offerCategory)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OfferCategory  $offerCategory
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, OfferCategory $offerCategory)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\OfferCategory  $offerCategory
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(OfferCategory $offerCategory)
     {
         //
