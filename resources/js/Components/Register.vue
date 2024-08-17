@@ -21,7 +21,7 @@ import Card from './Card.vue'
                 </Card>
             </div>
             <div>
-                <Card :src="'images/expenses.svg'">
+                <Card :src="'images/expenses.svg'" :href="route('expense.create')">
                     Cadastrar despesas
                 </Card>
             </div>

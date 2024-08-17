@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OfferCategoryController;
 use App\Http\Controllers\OfferController;
@@ -40,25 +42,45 @@ Route::middleware('auth')->group(function () {
 
 
     // membros 
-    Route::get('membro/cadastrar', [MemberController::class, 'create'])->name('member.create');
-    Route::get('membro/procurar', [MemberController::class, 'search'])->name('member.search');
-    Route::post('membro/inserir', [MemberController::class, 'store'])->name('member.store');
+    Route::prefix('membro')->group(function () {
+        Route::get('/cadastrar', [MemberController::class, 'create'])->name('member.create');
+        Route::get('/procurar', [MemberController::class, 'search'])->name('member.search');
+        Route::post('/inserir', [MemberController::class, 'store'])->name('member.store');
+    });
 
-    // Dizimos
-    Route::get('dizimo/listarMembros', [TitheController::class, 'memberList'])->name('tithe.list');
-    Route::get('dizimo/cadastrar', [TitheController::class, 'create'])->name('tithe.create');
-    Route::post('dizimo/inserir', [TitheController::class, 'store'])->name('tithe.store');
+    // 
+    Route::prefix('dizimo')->group(function () {
+        Route::get('/listarMembros', [TitheController::class, 'memberList'])->name('tithe.list');
+        Route::get('/cadastrar', [TitheController::class, 'create'])->name('tithe.create');
+        Route::post('/inserir', [TitheController::class, 'store'])->name('tithe.store');
+    });
 
     // Ofertas
-    Route::get('oferta/cadastrar', [OfferController::class, 'create'])->name('offer.create');
-    Route::post('oferta/inserir', [OfferController::class, 'store'])->name('offer.store');
+    Route::prefix('oferta')->group(function () {
+        Route::get('/cadastrar', [OfferController::class, 'create'])->name('offer.create');
+        Route::post('/inserir', [OfferController::class, 'store'])->name('offer.store');
+    });
+
 
     // categorias de ofertas
-    Route::prefix('categoria-de-oferta/inserir')->group(
+    Route::prefix('categoria-de-oferta')->group(
         fn () =>
         Route::get('/listar', [OfferCategoryController::class, 'index'])->name('offerCategory.index'),
         Route::post('/inserir', [OfferCategoryController::class, 'store'])->name('offerCategory.store')
     );
+    // Despesas
+    Route::prefix('despesas')->group(function () {
+        Route::get('/cadastrar', [ExpenseController::class, 'create'])
+            ->name('expense.create');
+    });
+
+    // Categoria de despesas
+    Route::prefix('categoria-custos')->group(function () {
+        Route::get('/listar', [ExpenseCategoryController::class, 'index'])
+            ->name('expenseCategory.index');
+        Route::post('/inserir', [ExpenseCategoryController::class, 'store'])
+            ->name('expenseCategory.store');
+    });
 });
 
 require __DIR__ . '/auth.php';
